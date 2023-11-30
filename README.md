@@ -6,7 +6,7 @@ staying blazing fast.
 [![CircleCI](https://circleci.com/gh/drn/nerd-ls.svg?style=svg)](https://circleci.com/gh/drn/nerd-ls)
 [![Go Report Card](https://goreportcard.com/badge/github.com/drn/nerd-ls)](https://goreportcard.com/report/github.com/drn/nerd-ls)
 
-* * *
+---
 
 <p align="center"><img src="screenshot.png" width="600"></p>
 
@@ -20,6 +20,7 @@ Application Options:
   -a, --all   Include directory entries whose names begin with a dot (.)
   -l, --long  List in long format
   -i, --icon  Display nerd-font icons
+  -R, --no-relative  Hide ./ and ../ when using --all flag
 
 Help Options:
   -h, --help  Show this help message
@@ -27,9 +28,22 @@ Help Options:
 
 ## Install
 
+```sh
+git clone https://github.com/jorismertz/nerd-ls; cd nerd-ls
+go build .
+sudo ln -s $(pwd)/nerd-ls /usr/local/bin/
 ```
-brew install drn/homebrew-tap/nerd-ls
-alias ls=nerd-ls # optional
+
+### Alias
+
+Add one of these aliases in preffered shell's rc file
+
+```sh
+# With sensible options (List with icons, hide ./ and ../ when using -a option)
+alias ls=nerd-ls -iR
+
+# Default
+alias ls=nerd-ls
 ```
 
 In order to have icons included with the -i/--icon flag, a patched
@@ -38,8 +52,8 @@ is required.
 
 Font Options:
 
-* [Patched Font Directory](https://github.com/ryanoasis/nerd-fonts#patched-fonts)
-* [Menlo Regular Nerd Font Complete](https://github.com/drn/dots/blob/master/fonts/Menlo%20Regular%20Nerd%20Font%20Complete.otf)
+- [Patched Font Directory](https://github.com/ryanoasis/nerd-fonts#patched-fonts)
+- [Menlo Regular Nerd Font Complete](https://github.com/drn/dots/blob/master/fonts/Menlo%20Regular%20Nerd%20Font%20Complete.otf)
 
 ## Release
 
@@ -54,6 +68,7 @@ GITHUB_TOKEN=... goreleaser
 <p>
 
 ls
+
 ```
 ❯ hyperfine "ls" --warmup 5
 Benchmark #1: ls
@@ -62,6 +77,7 @@ Benchmark #1: ls
 ```
 
 [nerd-ls](https://github.com/drn/nerd-ls)
+
 ```
 ❯ hyperfine "nerd-ls" --warmup 5
 Benchmark #1: nerd-ls
@@ -70,6 +86,7 @@ Benchmark #1: nerd-ls
 ```
 
 [exa](https://github.com/ogham/exa)
+
 ```
 ❯ hyperfine "exa" --warmup 5
 Benchmark #1: exa
@@ -78,6 +95,7 @@ Benchmark #1: exa
 ```
 
 [colorls](https://github.com/athityakumar/colorls)
+
 ```
 ❯ hyperfine "colorls" --warmup 5
 Benchmark #1: colorls
