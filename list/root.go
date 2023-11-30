@@ -1,11 +1,12 @@
 package list
 
 import (
-	"github.com/drn/nerd-ls/node"
 	"io/ioutil"
 	"log"
 	"os"
 	"sort"
+
+	"github.com/drn/nerd-ls/node"
 )
 
 // Fetch - Fetch List representing current directory
@@ -24,7 +25,7 @@ func Fetch(dir string, options map[string]interface{}) []node.Node {
 	nodes := make([]node.Node, len(files)+2)
 
 	index := 0
-	if options["all"].(bool) {
+	if options["all"].(bool) && !options["no-relative"].(bool) {
 		file, _ := os.Stat(".")
 		nodes[0] = node.New(dir, file)
 		file, _ = os.Stat("..")
