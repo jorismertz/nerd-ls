@@ -11,21 +11,29 @@ import (
 
 // ForFile - Return rune icon corresponding to input file name
 func ForFile(name string) rune {
+	if files[name] != 0 {
+		return files[name]
+	}
+
 	name = strings.ToLower(name)
 	ext := filepath.Ext(name)
+
 	if len(ext) != 0 {
 		ext = ext[1:]
 	} else {
 		ext = name
 	}
+
 	alias := fileAliases[ext]
 	if alias != "" {
 		ext = alias
 	}
+
 	icon := files[ext]
 	if icon == 0 {
 		return fileDefault
 	}
+
 	return icon
 }
 
@@ -124,7 +132,6 @@ var fileAliases = map[string]string{
 	"gz":               "zip",
 	"rar":              "zip",
 	"tar":              "zip",
-	"go":               "go",
 	"mod":              "go",
 	"sum":              "go",
 }
@@ -200,4 +207,6 @@ var files = map[string]rune{
 	"toml":         '\ue6b2',
 	"zip":          '\uf410',
 	"sql":          '\ue64d',
+	"rs":           '\ue68b',
+	"Cargo.lock":   '\ue68b',
 }
