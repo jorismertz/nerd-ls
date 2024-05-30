@@ -68,6 +68,8 @@ var fileAliases = map[string]string{
 	"webp":             "image",
 	"jar":              "java",
 	"properties":       "json",
+	"cjs":              "js",
+	"mjs":              "js",
 	"tsx":              "jsx",
 	"license":          "md",
 	"markdown":         "md",
@@ -118,9 +120,13 @@ var fileAliases = map[string]string{
 	"xlsx":             "xls",
 	"xul":              "xml",
 	"yaml":             "yml",
+	"toml":             "toml",
 	"gz":               "zip",
 	"rar":              "zip",
 	"tar":              "zip",
+	"go":               "go",
+	"mod":              "go",
+	"sum":              "go",
 }
 
 var files = map[string]rune{
@@ -148,7 +154,7 @@ var files = map[string]rune{
 	"font":         '\uf031',
 	"gform":        '\uf298',
 	"git":          '\uf7a1',
-	"go":           '\ufcd1',
+	"go":           '\ue65e',
 	"gruntfile.js": '\ue74c',
 	"hs":           '\ue777',
 	"html":         '\uf13b',
@@ -191,5 +197,7 @@ var files = map[string]rune{
 	"xml":          '\ue619',
 	"yarn.lock":    '\ue718',
 	"yml":          '\uf481',
+	"toml":         '\ue6b2',
 	"zip":          '\uf410',
+	"sql":          '\ue64d',
 }
