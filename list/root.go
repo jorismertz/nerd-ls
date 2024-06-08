@@ -1,24 +1,32 @@
 package list
 
 import (
-	"io/ioutil"
 	"log"
 	"os"
 	"sort"
 
+	"github.com/drn/nerd-ls/git"
 	"github.com/drn/nerd-ls/node"
 )
 
 // Fetch - Fetch List representing current directory
 func Fetch(dir string, options map[string]interface{}) []node.Node {
-	files, err := ioutil.ReadDir(dir)
+	// files, err := ioutil.ReadDir(dir)
+	files, err := os.ReadDir(dir)
 	if err != nil {
 		log.Fatal(err)
 	}
 
+	if options["git-ignore"].(bool) {
+		patterns := git.ReadIgnoreFile()
+		files = git.FilterFiles(files, patterns)
+	}
+
 	if options["size-sort"].(bool) {
 		sort.Slice(files, func(i, j int) bool {
-			return files[i].Size() > files[j].Size()
+			infoI, _ := files[i].Info()
+			infoJ, _ := files[j].Info()
+			return infoI.Size() > infoJ.Size()
 		})
 	}
 
@@ -37,7 +45,12 @@ func Fetch(dir string, options map[string]interface{}) []node.Node {
 		if !options["all"].(bool) && []rune(files[i].Name())[0] == '.' {
 			continue
 		}
-		nodes[index] = node.New(dir, files[i])
+
+		info, err := files[i].Info()
+		if err != nil {
+			log.Fatal(err)
+		}
+		nodes[index] = node.New(dir, info)
 		index++
 	}
 

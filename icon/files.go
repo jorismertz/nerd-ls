@@ -11,12 +11,12 @@ import (
 
 // ForFile - Return rune icon corresponding to input file name
 func ForFile(name string) rune {
+	name = strings.ToLower(name)
+	ext := filepath.Ext(name)
+
 	if files[name] != 0 {
 		return files[name]
 	}
-
-	name = strings.ToLower(name)
-	ext := filepath.Ext(name)
 
 	if len(ext) != 0 {
 		ext = ext[1:]
@@ -208,5 +208,5 @@ var files = map[string]rune{
 	"zip":          '\uf410',
 	"sql":          '\ue64d',
 	"rs":           '\ue68b',
-	"Cargo.lock":   '\ue68b',
+	"cargo.lock":   '\ue68b',
 }
